@@ -1,11 +1,141 @@
-<div style="background: #1e293b; padding: 30px; border-radius: 20px; text-align: center; border: 2px solid #00ff88;">
-    <h2 style="color: #00ff88; margin-bottom: 10px;">NFFM LIVE</h2>
-    <p style="color: #ccc; font-size: 14px;">Listen to our high-quality broadcast below.</p>
-    
-    <button onclick="window.open('http://37.157.242.104:34275/stream', 'NFFM', 'width=350,height=150');" 
-            style="background: #00ff88; color: #0f172a; border: none; padding: 15px 30px; font-weight: bold; border-radius: 10px; cursor: pointer; font-size: 16px;">
-        ▶ LAUNCH PLAYER
-    </button>
-    
-    <p style="font-size: 11px; color: #666; margin-top: 15px;">Works on all browsers & mobile devices.</p>
-</div>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFFM - Wir haben Character</title>
+    <style>
+        :root {
+            --nffm-red: #d64545;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            max-width: 220px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .slogan {
+            color: var(--nffm-red);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .play-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .play-button {
+            background-color: var(--nffm-red);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 15px -3px rgba(214, 69, 69, 0.4);
+        }
+
+        .play-button:hover {
+            background-color: #b33939;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 20px -3px rgba(214, 69, 69, 0.5);
+        }
+
+        .info-text {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: #475569;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="Herunterladen.png" alt="NFFM Logo" class="logo">
+        
+        <h1>NFFM</h1>
+        <div class="slogan">Wir haben Character</div>
+
+        <div class="play-section">
+            <button class="play-button" onclick="openPopup()">
+                <span>▶</span> JETZT LIVE HÖREN
+            </button>
+            <p class="info-text">Öffnet den Player im Popup-Fenster</p>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 NFFM RADIO STATION
+        </div>
+    </div>
+
+    <script>
+        function openPopup() {
+            // Die URL deines Streams
+            const streamUrl = "http://37.157.242.104:34275/;stream";
+            
+            // Einstellungen für das Popup (Breite, Höhe, etc.)
+            const width = 400;
+            const height = 150;
+            const left = (screen.width / 2) - (width / 2);
+            const top = (screen.height / 2) - (height / 2);
+            
+            window.open(
+                streamUrl, 
+                "NFFM Player", 
+                `width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=no`
+            );
+        }
+    </script>
+
+</body>
+</html>
