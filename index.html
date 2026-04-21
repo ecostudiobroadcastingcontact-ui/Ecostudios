@@ -7,135 +7,187 @@
     <style>
         :root {
             --nffm-red: #d64545;
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --text-light: #f8fafc;
+            --bg-light: #f4f4f4;
+            --white: #ffffff;
+            --text-dark: #333;
         }
 
         body {
             margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* NAVIGATION / HEADER */
+        header {
+            background-color: var(--white);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid var(--nffm-red);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-logo {
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        nav { font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* MAIN CONTENT AREA */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* GROSSE HAUPTBOX (HERO) */
+        .hero-article {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            background-color: var(--white);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .hero-image-container {
+            position: relative;
+            background: #000;
+            min-height: 300px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
         }
 
-        .container {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
         }
 
-        .logo {
-            max-width: 220px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.2rem;
-            font-weight: 800;
-        }
-
-        .slogan {
-            color: var(--nffm-red);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
-        .play-section {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-        }
-
-        .play-button {
-            background-color: var(--nffm-red);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
+        /* DER PLAY BUTTON AUF DEM BILD */
+        .play-overlay {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 15px -3px rgba(214, 69, 69, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        .play-button:hover {
-            background-color: #b33939;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 20px -3px rgba(214, 69, 69, 0.5);
+        .play-overlay:hover { transform: scale(1.1); background: var(--nffm-red); }
+
+        .play-triangle {
+            width: 0; height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid white;
+            margin-left: 5px;
         }
 
-        .info-text {
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #94a3b8;
+        .hero-text {
+            padding: 30px;
+            background-color: #004b7c; /* Ein dunkles Blau passend zum Stil */
+            color: white;
         }
 
-        .footer {
-            margin-top: 30px;
-            font-size: 0.7rem;
-            color: #475569;
-            letter-spacing: 1px;
+        .hero-text h2 { margin-top: 0; font-size: 28px; }
+
+        /* UNTERE BOXEN (GRID) */
+        .article-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .sub-article {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .sub-img {
+            width: 100%;
+            height: 150px;
+            background: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .sub-content { padding: 15px; }
+        .sub-content h3 { margin: 0; color: #004b7c; font-size: 18px; }
+        .sub-content p { font-size: 14px; line-height: 1.4; }
+
+        @media (max-width: 768px) {
+            .hero-article, .article-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="Herunterladen.png" alt="NFFM Logo" class="logo">
-        
-        <h1>NFFM</h1>
-        <div class="slogan">Wir haben Character</div>
+<header>
+    <img src="Herunterladen.png" alt="Logo" class="header-logo">
+    <nav>NFFM - Radio Portal</nav>
+</header>
 
-        <div class="play-section">
-            <button class="play-button" onclick="openPopup()">
-                <span>▶</span> JETZT LIVE HÖREN
-            </button>
-            <p class="info-text">Öffnet den Player im Popup-Fenster</p>
+<div class="container">
+    
+    <div class="hero-article">
+        <div class="hero-image-container">
+            <img src="Herunterladen.png" alt="Studio">
+            <div class="play-overlay" onclick="openRadio()">
+                <div class="play-triangle"></div>
+            </div>
         </div>
-
-        <div class="footer">
-            &copy; 2026 NFFM RADIO STATION
+        <div class="hero-text">
+            <h2>NFFM: Jetzt Live einschalten</h2>
+            <p>Wir haben Character. Erfahre alles über unsere neuesten Sendungen und Musik-Mixes direkt im Web-Player.</p>
         </div>
     </div>
 
-    <script>
-        function openPopup() {
-            // Die URL deines Streams ohne Semikolon
-            const streamUrl = "http://37.157.242.104:34275/stream";
-            
-            // Popup-Einstellungen
-            const width = 450;
-            const height = 200;
-            const left = (screen.width / 2) - (width / 2);
-            const top = (screen.height / 2) - (height / 2);
-            
-            window.open(
-                streamUrl, 
-                "NFFM_Player", 
-                `width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=no`
-            );
-        }
-    </script>
+    <div class="article-grid">
+        <div class="sub-article">
+            <div class="sub-img"><img src="Herunterladen.png" style="width:50%"></div>
+            <div class="sub-content">
+                <h3>Wetter & Verkehr</h3>
+                <p>Immer auf dem Laufenden bleiben mit NFFM Info.</p>
+            </div>
+        </div>
+        <div class="sub-article">
+            <div class="sub-img"><img src="Herunterladen.png" style="width:50%"></div>
+            <div class="sub-content">
+                <h3>Team & Studio</h3>
+                <p>Wer steckt hinter NFFM? Lerne unsere Moderatoren kennen.</p>
+            </div>
+        </div>
+        <div class="sub-article">
+            <div class="sub-img"><img src="Herunterladen.png" style="width:50%"></div>
+            <div class="sub-content">
+                <h3>Programm</h3>
+                <p>Wann läuft was? Hier geht es zum Sendeplan.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function openRadio() {
+    const url = "http://37.157.242.104:34275/stream";
+    const specs = "width=400,height=150,menubar=no,toolbar=no,location=no,status=no,resizable=no";
+    window.open(url, "NFFM_Player", specs);
+}
+</script>
 
 </body>
 </html>
