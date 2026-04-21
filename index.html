@@ -1,1 +1,99 @@
-<iframe src="http://37.157.242.104:34275/stream" width="300" height="100" frameborder="0"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFFM - Live Stream</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: #2d2d2d;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 { color: #00ff88; margin-bottom: 10px; }
+        p { color: #aaaaaa; margin-bottom: 30px; }
+        
+        /* The Player Area */
+        #muses-player { margin-bottom: 30px; }
+
+        .launch-btn {
+            background-color: #00ff88;
+            color: #1a1a1a;
+            border: none;
+            padding: 15px 25px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .launch-btn:hover {
+            background-color: #00cc6e;
+            transform: scale(1.05);
+        }
+        .footer-note {
+            font-size: 12px;
+            margin-top: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>NFFM</h1>
+    <p>Now Broadcasting Live</p>
+
+    <div id="muses-player">
+        <script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+        <script type="text/javascript">
+            MRP.insert({
+                'url':'http://37.157.242.104:34275/;',
+                'lang':'en',
+                'volume':80,
+                'autoplay':false,
+                'forceHTML5':true,
+                'jsevents':true,
+                'buffering':0,
+                'title':'NFFM',
+                'welcome':'Welcome to NFFM',
+                'wmode':'transparent',
+                'skin':'mcclean',
+                'width':180,
+                'height':60
+            });
+        </script>
+    </div>
+    <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+
+    <p style="font-size: 14px;">Player not loading? Use the secure launcher:</p>
+    <button class="launch-btn" onclick="openSecurePlayer()">▶ Launch Radio Player</button>
+
+    <div class="footer-note">
+        If the player remains silent, ensure your <strong>PlayIt Live</strong> is actively streaming to port 34275.
+    </div>
+</div>
+
+<script>
+    function openSecurePlayer() {
+        // This opens a new window which allows the HTTP stream to bypass GitHub's HTTPS block
+        window.open('http://37.157.242.104:34275/stream', 'NFFMPlayer', 'width=400,height=200');
+    }
+</script>
+
+</body>
+</html>
