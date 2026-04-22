@@ -20,32 +20,27 @@
             color: var(--text-dark);
         }
 
-        /* HEADER & LOGO */
+        /* HEADER */
         header {
             background-color: var(--white);
             padding: 15px 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
         }
 
-        .header-left { display: flex; align-items: center; }
-        .header-logo { height: 60px; margin-right: 20px; }
-        
-        .station-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--nffm-blue);
-            text-transform: uppercase;
-        }
+        .header-logo { height: 50px; margin-right: 20px; }
+        .station-name { font-size: 24px; font-weight: bold; color: var(--nffm-blue); text-transform: uppercase; }
 
         /* NAVIGATION TABS */
         .nav-bar {
             background-color: var(--white);
-            border-top: 1px solid #eee;
+            border-bottom: 3px solid var(--nffm-red);
             display: flex;
             padding: 0 20px;
-            overflow-x: auto;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .nav-tab {
@@ -55,154 +50,151 @@
             font-weight: bold;
             font-size: 14px;
             text-transform: uppercase;
-            white-space: nowrap;
-            transition: 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
         }
 
-        .nav-tab:hover { color: var(--nffm-red); }
-        .nav-tab.active { border-bottom: 4px solid var(--nffm-red); }
+        .nav-tab.active { border-bottom: 4px solid var(--nffm-red); color: var(--nffm-red); }
 
-        /* WETTER LEISTE (Neu) */
-        .weather-bar {
-            background-color: #e9ecef;
-            border-bottom: 3px solid var(--nffm-red);
-            padding: 10px 20px;
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            font-size: 13px;
-            font-weight: bold;
-            color: var(--nffm-blue);
-        }
-
-        .weather-item {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-            background: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .weather-icon { margin-right: 5px; font-size: 16px; }
-
-        /* CONTAINER */
-        .container {
-            max-width: 1100px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .main-layout {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-        }
-
-        /* HERO BOX */
-        .hero-box {
-            background-color: var(--white);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .hero-img-wrap {
-            position: relative;
-            height: 350px;
-            background: #000;
+        /* WETTER LEISTE (LIVE WIDGET) */
+        .weather-container {
+            background: #e9ecef;
+            padding: 10px;
             overflow: hidden;
         }
 
-        .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        /* CONTENT SECTIONS */
+        .tab-content { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
+        .tab-content.active { display: block; }
 
-        .play-btn-big {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90px;
-            height: 90px;
-            background: rgba(214, 69, 69, 0.9);
-            border-radius: 50%;
-            border: 4px solid white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.3s;
-            z-index: 10;
+        /* MAIN LAYOUT (HOME) */
+        .main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+
+        .hero-box { background: var(--white); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .hero-img-wrap { position: relative; height: 350px; background: #000; }
+        .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+
+        .play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80px; height: 80px; background: var(--nffm-red);
+            border-radius: 50%; border: 3px solid white; cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        .play-btn-big:hover { transform: translate(-50%, -50%) scale(1.1); background: var(--nffm-red); }
-        .play-icon { width: 0; height: 0; border-top: 18px solid transparent; border-bottom: 18px solid transparent; border-left: 28px solid white; margin-left: 8px; }
+        .play-icon { width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid white; margin-left: 5px; }
 
-        .hero-info { padding: 25px; background-color: var(--nffm-blue); color: white; }
+        .info-pane { padding: 20px; background: var(--nffm-blue); color: white; }
 
-        /* SIDEBAR */
-        .grid-small { display: flex; flex-direction: column; gap: 20px; }
-        .news-card { background: var(--white); box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; height: 100px; }
-        .news-card img { width: 100px; object-fit: cover; }
-        .news-content { padding: 10px; }
-        .news-content h4 { margin: 0; font-size: 14px; color: var(--nffm-blue); }
+        /* VERKEHR STYLING */
+        .traffic-item {
+            background: white; padding: 15px; margin-bottom: 10px;
+            border-left: 5px solid #ffcc00; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
 
-        @media (max-width: 850px) { .main-layout { grid-template-columns: 1fr; } }
+        @media (max-width: 800px) { .main-layout { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="header-left">
-        <img src="Herunterladen.png" alt="NFFM" class="header-logo">
-        <div class="station-name">NFFM Radio</div>
-    </div>
+    <img src="Herunterladen.png" alt="NFFM" class="header-logo">
+    <div class="station-name">NFFM Radio</div>
 </header>
 
-<nav class="nav-bar">
-    <a href="#" class="nav-tab active">Home</a>
-    <a href="#" class="nav-tab">Programm</a>
-    <a href="#" class="nav-tab">Team</a>
-    <a href="#" class="nav-tab">Kontakt</a>
-</nav>
+<div class="nav-bar">
+    <button class="nav-tab active" onclick="showTab('home')">Home</button>
+    <button class="nav-tab" onclick="showTab('programm')">Programm</button>
+    <button class="nav-tab" onclick="showTab('verkehr')">Verkehr</button>
+    <button class="nav-tab" onclick="showTab('team')">Team</button>
+</div>
 
-<div class="weather-bar">
-    <div class="weather-item"><span class="weather-icon">☀️</span> Saarbrücken: 18°C</div>
-    <div class="weather-item"><span class="weather-icon">🌤️</span> Saarlouis: 17°C</div>
-    <div class="weather-item"><span class="weather-icon">☁️</span> Völklingen: 17°C</div>
-    <div class="weather-item"><span class="weather-icon">☀️</span> Merzig: 16°C</div>
-    </div>
+<div class="weather-container">
+    <iframe src="https://www.meteoblue.com/de/wetter/widget/three/saarbr%c3%bccken_deutschland_2841590?geoblocking=0&use_location=0&city_selector=1&common_bg_color=%23e9ecef&display_temp=1&display_wind=1&display_precipitation=1&display_sun=1&display_visibility=1&display_pressure=1&display_humidity=1&filter=none&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&precipunit=MILLIMETER&coloured=1&pictoicon=1&font=Arial&layout=dark"  frameborder="0" scrolling="NO" allowtransparency="true" style="width: 100%; height: 250px;"></iframe>
+</div>
 
 <div class="container">
-    <div class="main-layout">
-        <div class="hero-box">
-            <div class="hero-img-wrap">
-                <img src="Herunterladen.png" alt="Studio">
-                <div class="play-btn-big" onclick="openPlayer()">
-                    <div class="play-icon"></div>
+    
+    <div id="home" class="tab-content active">
+        <div class="main-layout">
+            <div class="hero-box">
+                <div class="hero-img-wrap">
+                    <img src="Herunterladen.png">
+                    <div class="play-btn" onclick="openPlayer()">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="info-pane">
+                    <h2>NFFM Live: Wir haben Character</h2>
+                    <p>Klicke auf den Button, um den Stream im Player zu öffnen.</p>
                 </div>
             </div>
-            <div class="hero-info">
-                <h2 style="margin: 5px 0;">NFFM: Wir haben Character</h2>
-                <p>Klicke auf Play, um den Live-Stream zu starten.</p>
-            </div>
-        </div>
-
-        <div class="grid-small">
-            <div class="news-card">
-                <img src="Herunterladen.png">
-                <div class="news-content"><h4>Verkehrsservice</h4><p>Aktuelle Meldungen aus dem Saarland.</p></div>
-            </div>
-            <div class="news-card">
-                <img src="Herunterladen.png">
-                <div class="news-content"><h4>NFFM Team</h4><p>Deine Moderatoren im Überblick.</p></div>
+            <div style="background: white; padding: 20px;">
+                <h3>Aktuelle News</h3>
+                <p>NFFM startet neues Web-Portal für das Saarland!</p>
+                <hr>
+                <p>Studio-Update: Neue Mikrofone für besseren Sound.</p>
             </div>
         </div>
     </div>
+
+    <div id="programm" class="tab-content">
+        <h2>Sendeplan</h2>
+        <table style="width:100%; background: white; border-collapse: collapse;">
+            <tr style="background: var(--nffm-blue); color: white;">
+                <th style="padding:10px;">Zeit</th><th style="padding:10px;">Sendung</th>
+            </tr>
+            <tr><td style="padding:10px; border-bottom:1px solid #ddd;">08:00 - 12:00</td><td style="padding:10px; border-bottom:1px solid #ddd;">NFFM Morning Show</td></tr>
+            <tr><td style="padding:10px; border-bottom:1px solid #ddd;">12:00 - 16:00</td><td style="padding:10px; border-bottom:1px solid #ddd;">Der Character-Mittag</td></tr>
+            <tr><td style="padding:10px;">16:00 - 20:00</td><td style="padding:10px;">Feierabend-Mix</td></tr>
+        </table>
+    </div>
+
+    <div id="verkehr" class="tab-content">
+        <h2>Verkehrsmeldungen & Blitzer</h2>
+        <div class="traffic-item"><strong>A620:</strong> Saarlouis Richtung Saarbrücken - 2km Stau nach Unfall.</div>
+        <div class="traffic-item"><strong>Völklingen:</strong> Vorsicht, mobiler Blitzer in der Innenstadt!</div>
+        <div class="traffic-item"><strong>Merzig:</strong> Freie Fahrt auf allen Hauptstraßen.</div>
+        <p style="font-size: 12px; color: #666;">Aktualisiert: Gerade eben</p>
+    </div>
+
+    <div id="team" class="tab-content">
+        <h2>Unser Team</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div style="background: white; padding: 15px; text-align: center;">
+                <img src="Herunterladen.png" style="width: 100px; border-radius: 50%;">
+                <h4>Moderator 1</h4>
+            </div>
+            <div style="background: white; padding: 15px; text-align: center;">
+                <img src="Herunterladen.png" style="width: 100px; border-radius: 50%;">
+                <h4>Moderator 2</h4>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
-function openPlayer() {
-    window.open("http://37.157.242.104:34275/stream", "NFFM_Player", "width=400,height=200");
-}
+    // TAB LOGIK
+    function showTab(tabId) {
+        // Alle Inhalte verstecken
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+        
+        // Alle Tabs deaktivieren
+        const tabs = document.querySelectorAll('.nav-tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        
+        // Gewählten Tab aktivieren
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // RADIO PLAYER POPUP
+    function openPlayer() {
+        const url = "http://37.157.242.104:34275/stream";
+        window.open(url, "NFFM_Player", "width=450,height=200");
+    }
 </script>
 
 </body>
