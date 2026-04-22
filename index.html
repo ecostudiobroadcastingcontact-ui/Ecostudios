@@ -7,6 +7,7 @@
     <style>
         :root {
             --nffm-red: #d64545;
+            --nffm-blue: #004b7c;
             --bg-light: #f4f4f4;
             --white: #ffffff;
             --text-dark: #333;
@@ -19,162 +20,204 @@
             color: var(--text-dark);
         }
 
-        /* NAVIGATION / HEADER */
+        /* HEADER & LOGO */
         header {
             background-color: var(--white);
-            padding: 10px 20px;
+            padding: 15px 20px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left { display: flex; align-items: center; }
+        .header-logo { height: 60px; margin-right: 20px; }
+        
+        .station-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--nffm-blue);
+            text-transform: uppercase;
+        }
+
+        /* NAVIGATION TABS */
+        .nav-bar {
+            background-color: var(--white);
+            border-top: 1px solid #eee;
             border-bottom: 3px solid var(--nffm-red);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            padding: 0 20px;
+            overflow-x: auto;
         }
 
-        .header-logo {
-            height: 50px;
-            margin-right: 20px;
+        .nav-tab {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: 0.2s;
         }
 
-        nav { font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-tab:hover {
+            color: var(--nffm-red);
+            background-color: #f9f9f9;
+        }
 
-        /* MAIN CONTENT AREA */
+        .nav-tab.active {
+            border-bottom: 4px solid var(--nffm-red);
+            margin-bottom: -3px;
+        }
+
+        /* CONTAINER */
         .container {
             max-width: 1100px;
             margin: 20px auto;
             padding: 0 15px;
         }
 
-        /* GROSSE HAUPTBOX (HERO) */
-        .hero-article {
+        /* HAUPT-LAYOUT (Vgl. SR.de) */
+        .main-layout {
             display: grid;
-            grid-template-columns: 1.5fr 1fr;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        /* HERO BOX */
+        .hero-box {
             background-color: var(--white);
-            margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .hero-img-wrap {
+            position: relative;
+            height: 350px;
+            background: #000;
             overflow: hidden;
         }
 
-        .hero-image-container {
-            position: relative;
-            background: #000;
-            min-height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image-container img {
+        .hero-img-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
-        /* DER PLAY BUTTON AUF DEM BILD */
-        .play-overlay {
+        .play-btn-big {
             position: absolute;
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.2);
-            border: 3px solid white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: rgba(214, 69, 69, 0.9);
             border-radius: 50%;
+            border: 4px solid white;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: 0.3s;
+            z-index: 10;
         }
 
-        .play-overlay:hover { transform: scale(1.1); background: var(--nffm-red); }
+        .play-btn-big:hover { transform: translate(-50%, -50%) scale(1.1); background: var(--nffm-red); }
 
-        .play-triangle {
+        .play-icon {
             width: 0; height: 0;
-            border-top: 15px solid transparent;
-            border-bottom: 15px solid transparent;
-            border-left: 25px solid white;
-            margin-left: 5px;
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-left: 28px solid white;
+            margin-left: 8px;
         }
 
-        .hero-text {
-            padding: 30px;
-            background-color: #004b7c; /* Ein dunkles Blau passend zum Stil */
+        .hero-info {
+            padding: 25px;
+            background-color: var(--nffm-blue);
             color: white;
         }
 
-        .hero-text h2 { margin-top: 0; font-size: 28px; }
-
-        /* UNTERE BOXEN (GRID) */
-        .article-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+        /* SIDEBAR / NEWS GRID */
+        .grid-small {
+            display: flex;
+            flex-direction: column;
             gap: 20px;
         }
 
-        .sub-article {
-            background-color: var(--white);
+        .news-card {
+            background: var(--white);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .sub-img {
-            width: 100%;
-            height: 150px;
-            background: #ccc;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            height: 100px;
         }
 
-        .sub-content { padding: 15px; }
-        .sub-content h3 { margin: 0; color: #004b7c; font-size: 18px; }
-        .sub-content p { font-size: 14px; line-height: 1.4; }
+        .news-card img { width: 100px; object-fit: cover; }
+        .news-content { padding: 10px; }
+        .news-content h4 { margin: 0; font-size: 14px; color: var(--nffm-blue); }
+        .news-content p { margin: 5px 0 0; font-size: 12px; }
 
-        @media (max-width: 768px) {
-            .hero-article, .article-grid { grid-template-columns: 1fr; }
+        @media (max-width: 850px) {
+            .main-layout { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="Herunterladen.png" alt="Logo" class="header-logo">
-    <nav>NFFM - Radio Portal</nav>
+    <div class="header-left">
+        <img src="Herunterladen.png" alt="NFFM" class="header-logo">
+        <div class="station-name">NFFM Radio</div>
+    </div>
 </header>
+
+<nav class="nav-bar">
+    <a href="#" class="nav-tab active">Home</a>
+    <a href="#" class="nav-tab">Programm</a>
+    <a href="#" class="nav-tab">Team</a>
+    <a href="#" class="nav-tab">Charts</a>
+    <a href="#" class="nav-tab">Kontakt</a>
+</nav>
 
 <div class="container">
     
-    <div class="hero-article">
-        <div class="hero-image-container">
-            <img src="Herunterladen.png" alt="Studio">
-            <div class="play-overlay" onclick="openRadio()">
-                <div class="play-triangle"></div>
+    <div class="main-layout">
+        <div class="hero-box">
+            <div class="hero-img-wrap">
+                <img src="Herunterladen.png" alt="Studio">
+                <div class="play-btn-big" onclick="openPlayer()">
+                    <div class="play-icon"></div>
+                </div>
+            </div>
+            <div class="hero-info">
+                <span style="text-transform: uppercase; font-size: 12px; opacity: 0.8;">Jetzt Live</span>
+                <h2 style="margin: 5px 0;">Wir haben Character - Die NFFM Morning Show</h2>
+                <p style="font-size: 14px; opacity: 0.9;">Klicke auf den Play-Button, um unser Programm weltweit im Web-Player zu hören.</p>
             </div>
         </div>
-        <div class="hero-text">
-            <h2>NFFM: Jetzt Live einschalten</h2>
-            <p>Wir haben Character. Erfahre alles über unsere neuesten Sendungen und Musik-Mixes direkt im Web-Player.</p>
-        </div>
-    </div>
 
-    <div class="article-grid">
-        <div class="sub-article">
-            <div class="sub-img"><img src="Herunterladen.png" style="width:50%"></div>
-            <div class="sub-content">
-                <h3>Wetter & Verkehr</h3>
-                <p>Immer auf dem Laufenden bleiben mit NFFM Info.</p>
+        <div class="grid-small">
+            <div class="news-card">
+                <img src="Herunterladen.png" alt="News">
+                <div class="news-content">
+                    <h4>Wetter</h4>
+                    <p>Aktuelle Aussichten für die Region.</p>
+                </div>
             </div>
-        </div>
-        <div class="sub-article">
-            <div class="sub-img"><img src="Herunterladen.png" style="width:50%"></div>
-            <div class="sub-content">
-                <h3>Team & Studio</h3>
-                <p>Wer steckt hinter NFFM? Lerne unsere Moderatoren kennen.</p>
+            <div class="news-card">
+                <img src="Herunterladen.png" alt="News">
+                <div class="news-content">
+                    <h4>Verkehr</h4>
+                    <p>Alle Staus und Blitzer auf einen Blick.</p>
+                </div>
             </div>
-        </div>
-        <div class="sub-article">
-            <div class="sub-img"><img src="Herunterladen.png" style="width:50%"></div>
-            <div class="sub-content">
-                <h3>Programm</h3>
-                <p>Wann läuft was? Hier geht es zum Sendeplan.</p>
+            <div class="news-card">
+                <img src="Herunterladen.png" alt="News">
+                <div class="news-content">
+                    <h4>Team-Blog</h4>
+                    <p>Hinter den Kulissen von NFFM.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -182,9 +225,9 @@
 </div>
 
 <script>
-function openRadio() {
+function openPlayer() {
     const url = "http://37.157.242.104:34275/stream";
-    const specs = "width=400,height=150,menubar=no,toolbar=no,location=no,status=no,resizable=no";
+    const specs = "width=400,height=200,menubar=no,toolbar=no,location=no,status=no,resizable=no";
     window.open(url, "NFFM_Player", specs);
 }
 </script>
