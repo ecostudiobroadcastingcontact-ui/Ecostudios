@@ -44,17 +44,22 @@
         .schedule-table th { background: #f9f9f9; color: var(--nffm-blue); font-size: 12px; }
         .day-col { font-weight: bold; color: var(--nffm-red); width: 150px; }
 
-        /* VERKEHR & BLITZER */
+        /* VERKEHR & BLITZER AUTOMATIK */
         .traffic-entry { 
             background: white; padding: 15px; margin-bottom: 10px; 
-            border-left: 6px solid var(--nffm-red); border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            border-left: 6px solid #ccc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
         }
-        .entry-accident { border-left-color: black; background: #fff5f5; }
-        .entry-blitzer { border-left-color: var(--nffm-orange); background: #fffdf0; }
+        .type-gefahr { border-left-color: black; background: #fff0f0; }
+        .type-blitzer { border-left-color: var(--nffm-orange); background: #fffdf0; }
+        .type-baustelle { border-left-color: var(--nffm-blue); background: #f0f7ff; }
         
         .traffic-entry strong { color: var(--nffm-blue); display: block; margin-bottom: 5px; }
-        .tag-unfall { color: white; background: black; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-right: 5px; }
-        .tag-blitzer { color: white; background: var(--nffm-orange); padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-right: 5px; }
+        .badge { color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-right: 5px; font-weight: bold; }
+        .bg-black { background: black; }
+        .bg-orange { background: var(--nffm-orange); }
+        .bg-blue { background: var(--nffm-blue); }
+
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; border-top: 1px solid #ddd; margin-top: 50px; }
     </style>
 </head>
 <body>
@@ -67,8 +72,8 @@
 <div class="nav-bar">
     <button class="nav-tab active" onclick="showTab('home')">Home</button>
     <button class="nav-tab" onclick="showTab('programm')">Programm</button>
-    <button class="nav-tab" onclick="showTab('verkehr')">Verkehr & Blitzer</button>
-    <button class="nav-tab" onclick="showTab('team')">Team</button>
+    <button class="nav-tab" onclick="showTab('verkehr')">Live Traffic</button>
+    <button class="nav-tab" onclick="showTab('team')">Kontakt</button>
 </div>
 
 <div class="container">
@@ -96,23 +101,23 @@
     </div>
 
     <div id="verkehr" class="tab-content">
-        <h2 style="color: var(--nffm-red);">NFFM Verkehrszentrum</h2>
-        <p>Achtung: Unfälle und Blitzer-Meldungen aus der Redaktion:</p>
-        
-        <div class="traffic-entry entry-blitzer">
-            <strong><span class="tag-blitzer">BLITZER</span> A620 Richtung Saarbrücken</strong>
-            Höhe Bismarckbrücke wird aktuell scharf geschossen. Fuß vom Gas!
-            <br><small>Gemeldet: Gerade eben über NFFM Hotline</small>
-        </div>
-
-        <div id="traffic-list"><p>Lade aktuelle Verkehrslage...</p></div>
+        <h2 style="color: var(--nffm-red);">Automatisches Traffic Center</h2>
+        <p>Echtzeit-Scann von Blitzern, Unfällen und Dauerbaustellen:</p>
+        <div id="traffic-list"><p>System scannt den Datenstrom...</p></div>
     </div>
 
     <div id="team" class="tab-content">
-        <h2>Das Team</h2>
-        <p>Bald siehst du hier unsere Moderatoren.</p>
+        <h2>Kontakt & Team</h2>
+        <p>Du hast Blitzer gesehen oder willst ins Team? Schreib uns!</p>
+        <div class="hero-box" style="padding: 20px;">
+            <strong>E-Mail:</strong> <a href="mailto:ecostudiobroadcasting.contact@gmail.com" style="color: var(--nffm-red);">ecostudiobroadcasting.contact@gmail.com</a>
+        </div>
     </div>
 </div>
+
+<footer>
+    &copy; 2026 NFFM Media | Kontakt: ecostudiobroadcasting.contact@gmail.com | Wir haben Character.
+</footer>
 
 <script>
     function showTab(tabId) {
@@ -138,24 +143,37 @@
             list.innerHTML = "";
             
             if (!data.items || data.items.length === 0) {
-                list.innerHTML = "<div class='traffic-entry'>Aktuell keine weiteren Behinderungen gemeldet.</div>";
+                list.innerHTML = "<div class='traffic-entry'>Aktuell keine Meldungen im System. Gute Fahrt!</div>";
                 return;
             }
 
             data.items.forEach(item => {
-                const isAccident = item.title.toLowerCase().includes("unfall") || item.description.toLowerCase().includes("unfall");
+                const text = (item.title + " " + item.description).toLowerCase();
+                let typeClass = "";
+                let badge = "";
+
+                if (text.includes("blitzer") || text.includes("radar") || text.includes("kontrolle")) {
+                    typeClass = "type-blitzer";
+                    badge = "<span class='badge bg-orange'>BLITZER</span>";
+                } else if (text.includes("unfall") || text.includes("gefahr") || text.includes("gesperrt")) {
+                    typeClass = "type-gefahr";
+                    badge = "<span class='badge bg-black'>GEFAHR</span>";
+                } else if (text.includes("baustelle") || text.includes("arbeiten")) {
+                    typeClass = "type-baustelle";
+                    badge = "<span class='badge bg-blue'>BAUSTELLE</span>";
+                }
+
                 const entry = document.createElement('div');
-                entry.className = 'traffic-entry' + (isAccident ? ' entry-accident' : '');
-                
+                entry.className = `traffic-entry ${typeClass}`;
                 entry.innerHTML = `
-                    <strong>${isAccident ? '<span class="tag-unfall">GEFAHR</span>' : ''} ${item.title}</strong>
+                    <strong>${badge} ${item.title}</strong>
                     ${item.description}
-                    <br><small>${item.pubDate}</small>
+                    <br><small style="color:#999; font-size:10px;">Quelle: Automatisch erfasst am ${new Date().toLocaleDateString()} um ${new Date().toLocaleTimeString()}</small>
                 `;
                 list.appendChild(entry);
             });
         } catch (e) {
-            list.innerHTML = "<p>Fehler beim Laden der Verkehrsdaten.</p>";
+            list.innerHTML = "<p>Verbindungsfehler zum Traffic-Server.</p>";
         }
     }
 </script>
