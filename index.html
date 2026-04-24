@@ -38,6 +38,10 @@
         .play-icon { width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid white; margin-left: 5px; }
         .info-pane { padding: 20px; background: var(--nffm-blue); color: white; }
 
+        /* ÜBER UNS SECTION AUF HOME */
+        .about-section { padding: 30px; background: white; margin-top: 20px; border-radius: 4px; border-left: 5px solid var(--nffm-blue); }
+        .about-section h2 { color: var(--nffm-blue); margin-top: 0; }
+
         /* SENDEPLAN */
         .schedule-table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .schedule-table th, .schedule-table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
@@ -72,7 +76,7 @@
 <div class="nav-bar">
     <button class="nav-tab active" onclick="showTab('home')">Home</button>
     <button class="nav-tab" onclick="showTab('programm')">Programm</button>
-    <button class="nav-tab" onclick="showTab('verkehr')">Live Traffic</button>
+    <button class="nav-tab" onclick="showTab('verkehr')">Verkehrszentrum</button>
     <button class="nav-tab" onclick="showTab('team')">Kontakt</button>
 </div>
 
@@ -84,6 +88,13 @@
                 <h2>NFFM - Wir haben Character</h2>
                 <p>Echte Musik, echte Typen. Jetzt Live!</p>
             </div>
+        </div>
+        
+        <div class="about-section">
+            <h2>Über uns</h2>
+            <p>NFFM ist nicht einfach nur ein Radio – NFFM ist eine Einstellung. Wir senden direkt aus dem Herzen des Saarlands und bringen euch die Nachrichten für fast morgen, kombiniert mit echtem Rock und Charakter.</p>
+            <p>Bei uns gibt es keine glattgebügelten Moderatoren, sondern echte Typen, die sagen, was Sache ist. Ob aktuelle Blitzer, Unfälle oder die beste Musik für euren Feierabend – wir sind für euch da.</p>
+            <p><strong>Kontakt:</strong> <a href="mailto:ecostudiobroadcasting.contact@gmail.com" style="color: var(--nffm-red);">ecostudiobroadcasting.contact@gmail.com</a></p>
         </div>
     </div>
 
@@ -101,7 +112,7 @@
     </div>
 
     <div id="verkehr" class="tab-content">
-        <h2 style="color: var(--nffm-red);">Automatisches Traffic Center</h2>
+        <h2 style="color: var(--nffm-red);">Verkehrszentrum</h2>
         <p>Echtzeit-Scann von Blitzern, Unfällen und Dauerbaustellen:</p>
         <div id="traffic-list"><p>System scannt den Datenstrom...</p></div>
     </div>
@@ -168,12 +179,12 @@
                 entry.innerHTML = `
                     <strong>${badge} ${item.title}</strong>
                     ${item.description}
-                    <br><small style="color:#999; font-size:10px;">Quelle: Automatisch erfasst am ${new Date().toLocaleDateString()} um ${new Date().toLocaleTimeString()}</small>
+                    <br><small style="color:#999; font-size:10px;">Stand: ${new Date().toLocaleTimeString()} Uhr</small>
                 `;
                 list.appendChild(entry);
             });
         } catch (e) {
-            list.innerHTML = "<p>Verbindungsfehler zum Traffic-Server.</p>";
+            list.innerHTML = "<p>Verbindungsfehler zum Verkehrszentrum.</p>";
         }
     }
 </script>
