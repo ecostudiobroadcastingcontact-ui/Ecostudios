@@ -8,7 +8,6 @@
         :root {
             --nffm-red: #d64545;
             --nffm-blue: #004b7c;
-            --nffm-orange: #ff8c00;
             --bg-light: #f4f4f4;
             --white: #ffffff;
             --text-dark: #333;
@@ -16,36 +15,34 @@
 
         body { margin: 0; font-family: 'Arial', sans-serif; background-color: var(--bg-light); color: var(--text-dark); }
 
-        /* HEADER */
         header { background: var(--white); padding: 15px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
         .header-logo { height: 50px; margin-right: 20px; }
         .station-name { font-size: 24px; font-weight: bold; color: var(--nffm-blue); text-transform: uppercase; }
 
-        /* NAVIGATION */
         .nav-bar { background: var(--white); border-bottom: 3px solid var(--nffm-red); display: flex; padding: 0 20px; position: sticky; top: 0; z-index: 100; }
         .nav-tab { padding: 15px 20px; text-decoration: none; color: var(--text-dark); font-weight: bold; font-size: 14px; text-transform: uppercase; cursor: pointer; border: none; background: none; }
         .nav-tab.active { border-bottom: 4px solid var(--nffm-red); color: var(--nffm-red); }
 
-        /* CONTENT */
         .tab-content { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
         .tab-content.active { display: block; }
 
-        /* HERO & PLAY */
         .hero-box { background: var(--white); box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; border-radius: 4px; overflow: hidden; }
         .hero-img-wrap { position: relative; height: 300px; background: #222; display: flex; align-items: center; justify-content: center; }
-        .play-btn { width: 80px; height: 80px; background: var(--nffm-red); border-radius: 50%; border: 3px solid white; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+        
+        .play-btn { width: 80px; height: 80px; background: var(--nffm-red); border-radius: 50%; border: 3px solid white; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
+        .play-btn:hover { transform: scale(1.1); }
         .play-icon { width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid white; margin-left: 5px; }
-        .info-pane { padding: 20px; background: var(--nffm-blue); color: white; }
 
-        /* ÜBER UNS SECTION */
         .about-section { padding: 30px; background: white; margin-top: 20px; border-radius: 4px; border-left: 5px solid var(--nffm-blue); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .about-section h2 { color: var(--nffm-blue); margin-top: 0; }
 
-        /* MAINTENANCE / DEVELOPMENT STYLE */
-        .dev-box { 
-            background: #fffbe6; border: 2px dashed #ffe58f; padding: 40px; text-align: center; border-radius: 8px; margin-top: 20px; 
-        }
-        .dev-icon { font-size: 50px; margin-bottom: 15px; display: block; }
+        /* VERKEHRS-UPGRADE */
+        .traffic-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 20px; }
+        .map-container { background: #eee; height: 500px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; position: relative; }
+        .traffic-sidebar { display: flex; flex-direction: column; gap: 15px; }
+        .info-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn-live { display: block; width: 100%; padding: 12px; background: var(--nffm-red); color: white; text-align: center; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 10px; }
+        
+        @media (max-width: 800px) { .traffic-grid { grid-template-columns: 1fr; } }
 
         footer { text-align: center; padding: 40px; color: #888; font-size: 12px; border-top: 1px solid #ddd; margin-top: 50px; }
     </style>
@@ -68,52 +65,64 @@
     <div id="home" class="tab-content active">
         <div class="hero-box">
             <div class="hero-img-wrap"><div class="play-btn" onclick="openPlayer()"><div class="play-icon"></div></div></div>
-            <div class="info-pane">
+            <div style="padding:20px; background: var(--nffm-blue); color:white;">
                 <h2>NFFM - Wir haben Character</h2>
-                <p>Echte Musik, echte Typen. Der Sound von morgen.</p>
+                <p>Echte Musik, echte Typen. Der Sound vom Saarland.</p>
             </div>
         </div>
 
         <div class="about-section">
             <h2>Über uns</h2>
-            <p>NFFM befindet sich aktuell im Aufbau. Wir arbeiten unter Hochdruck daran, euch bald das volle Programm mit Live-Moderation und den „Nachrichten für fast morgen“ zu präsentieren.</p>
-            <p>Aktuell hört ihr unseren Non-Stop Musik-Stream – handverlesener Sound mit Charakter, direkt aus dem Saarland. Sobald unsere Redaktion den Betrieb aufnimmt, erfahrt ihr es hier zuerst.</p>
-            <p><strong>Kontakt & Feedback:</strong> <a href="mailto:ecostudiobroadcasting.contact@gmail.com" style="color: var(--nffm-red);">ecostudiobroadcasting.contact@gmail.com</a></p>
+            <p>NFFM ist nicht einfach nur Radio – es ist eine Ansage. Wir senden aus dem Herzen des Saarlandes für alle, die genug von weichgespültem Einheitsbrei haben.</p>
+            <p>Aktuell hörst du unseren 24/7 Musik-Stream. Wir bauen gerade das Studio um, damit wir euch bald mit Live-Moderation und den „Nachrichten für fast morgen“ wecken können.</p>
+            <p><strong>Kontakt:</strong> <a href="mailto:ecostudiobroadcasting.contact@gmail.com" style="color: var(--nffm-red);">ecostudiobroadcasting.contact@gmail.com</a></p>
         </div>
     </div>
 
     <div id="programm" class="tab-content">
         <h2>Sendeplan</h2>
-        <p>Unsere Programmschiene wird derzeit finalisiert. Freut euch auf:</p>
-        <ul>
-            <li>NFFM Morningshow (Bald Live)</li>
-            <li>NFFM Abendschau (Bald Live)</li>
-            <li>NFFM Rock Weekend</li>
-        </ul>
+        <div class="about-section">
+            <p><strong>NFFM Morningshow</strong> (Bald Live)</p>
+            <p><strong>NFFM Abendschau</strong> (Bald Live)</p>
+            <p><strong>NFFM Rock Weekend</strong> (Jeden Samstag & Sonntag)</p>
+        </div>
     </div>
 
     <div id="verkehr" class="tab-content">
-        <h2 style="color: var(--nffm-red);">Verkehrszentrum</h2>
-        <div class="dev-box">
-            <span class="dev-icon">🚧</span>
-            <h3>Hier entsteht etwas Neues!</h3>
-            <p>Unser automatisches Verkehrszentrum für das Saarland befindet sich zur Zeit in der Entwicklung.</p>
-            <p>Wir arbeiten an einer direkten Schnittstelle, um euch Blitzer, Staus und Baustellen in Echtzeit und ohne Verzögerung anzeigen zu können.</p>
-            <p>Schaut bald wieder vorbei!</p>
+        <h2 style="color: var(--nffm-red);">NFFM Verkehrszentrum</h2>
+        <p>Echtzeit-Verkehrslage für das Saarland:</p>
+        
+        <div class="traffic-grid">
+            <div class="map-container">
+                <iframe width="100%" height="100%" frameborder="0" src="https://www.bing.com/maps/embed?h=500&w=700&cp=49.2333~6.9833&lvl=10&typ=d&sty=t&src=shell&FORM=MBEDV8" scrolling="no"></iframe>
+            </div>
+            
+            <div class="traffic-sidebar">
+                <div class="info-card">
+                    <h3>Blitzer & Staus</h3>
+                    <p>Holen Sie sich die aktuellsten Details direkt von unseren Partner-Daten:</p>
+                    <a href="https://stau.info/region/saarland" target="_blank" class="btn-live">Blitzer-Check Saarland</a>
+                    <a href="https://www.verkehrsinformation.de/saarland" target="_blank" class="btn-live" style="background:var(--nffm-blue);">Verkehrs-Details</a>
+                </div>
+                <div class="info-card" style="font-size: 0.9em; color: #666;">
+                    <strong>Character-Tipp:</strong><br>
+                    Fuß vom Gas, wenn's blitzt! Meldet uns neue Blitzer per Mail an die Redaktion.
+                </div>
+            </div>
         </div>
     </div>
 
     <div id="team" class="tab-content">
         <h2>Kontakt</h2>
-        <div class="hero-box" style="padding: 20px;">
-            <p>Du willst Teil des Teams werden oder hast Anregungen zum Programm?</p>
-            <strong>E-Mail:</strong> <a href="mailto:ecostudiobroadcasting.contact@gmail.com" style="color: var(--nffm-red);">ecostudiobroadcasting.contact@gmail.com</a>
+        <div class="about-section">
+            <strong>E-Mail Redaktion:</strong><br>
+            <a href="mailto:ecostudiobroadcasting.contact@gmail.com">ecostudiobroadcasting.contact@gmail.com</a>
         </div>
     </div>
 </div>
 
 <footer>
-    &copy; 2026 NFFM Media | Kontakt: ecostudiobroadcasting.contact@gmail.com | Wir haben Character.
+    &copy; 2026 NFFM Media | Wir haben Character.
 </footer>
 
 <script>
@@ -123,7 +132,6 @@
         document.getElementById(tabId).classList.add('active');
         if(event) event.currentTarget.classList.add('active');
     }
-
     function openPlayer() {
         window.open("http://37.157.242.104:34275/stream", "NFFM_Player", "width=450,height=200");
     }
