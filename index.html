@@ -16,23 +16,33 @@
 
         body { margin: 0; font-family: 'Arial', sans-serif; background-color: var(--bg-light); color: var(--text-dark); }
 
+        /* HEADER */
         header { background: var(--white); padding: 15px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
         .header-logo { height: 50px; margin-right: 20px; }
         .station-name { font-size: 24px; font-weight: bold; color: var(--nffm-blue); text-transform: uppercase; }
 
+        /* NAVIGATION */
         .nav-bar { background: var(--white); border-bottom: 3px solid var(--nffm-red); display: flex; padding: 0 20px; position: sticky; top: 0; z-index: 100; }
         .nav-tab { padding: 15px 20px; text-decoration: none; color: var(--text-dark); font-weight: bold; font-size: 14px; text-transform: uppercase; cursor: pointer; border: none; background: none; }
         .nav-tab.active { border-bottom: 4px solid var(--nffm-red); color: var(--nffm-red); }
 
+        /* CONTENT */
         .tab-content { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
         .tab-content.active { display: block; }
 
+        /* HERO & PLAY */
         .hero-box { background: var(--white); box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; border-radius: 4px; overflow: hidden; }
         .hero-img-wrap { position: relative; height: 300px; background: #222; display: flex; align-items: center; justify-content: center; color: white; }
-        .play-btn { width: 80px; height: 80px; background: var(--nffm-red); border-radius: 50%; border: 3px solid white; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+        .play-btn { width: 80px; height: 80px; background: var(--nffm-red); border-radius: 50%; border: 3px solid white; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: transform 0.2s; }
+        .play-btn:hover { transform: scale(1.1); }
         .play-icon { width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid white; margin-left: 5px; }
         .info-pane { padding: 20px; background: var(--nffm-blue); color: white; }
 
+        /* ÜBER UNS SECTION */
+        .about-section { padding: 30px; background: white; margin-top: 20px; border-radius: 4px; border-left: 5px solid var(--nffm-blue); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .about-section h2 { color: var(--nffm-blue); margin-top: 0; }
+
+        /* VERKEHRSEINTRÄGE */
         .traffic-entry { 
             background: white; padding: 18px; margin-bottom: 12px; 
             border-left: 6px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
@@ -40,8 +50,8 @@
         .type-gefahr { border-left-color: black; background: #fff1f1; }
         .type-blitzer { border-left-color: var(--nffm-orange); background: #fffef0; }
         .type-stau { border-left-color: var(--nffm-red); }
-
-        .badge { color: white; padding: 3px 8px; border-radius: 3px; font-size: 11px; margin-right: 8px; font-weight: bold; }
+        
+        .badge { color: white; padding: 3px 8px; border-radius: 3px; font-size: 11px; margin-right: 8px; font-weight: bold; text-transform: uppercase; }
         .bg-black { background: black; }
         .bg-orange { background: var(--nffm-orange); }
         .bg-red { background: var(--nffm-red); }
@@ -69,8 +79,15 @@
             <div class="hero-img-wrap"><div class="play-btn" onclick="openPlayer()"><div class="play-icon"></div></div></div>
             <div class="info-pane">
                 <h2>NFFM - Wir haben Character</h2>
-                <p>Jetzt Live: Echte Musik für das Saarland.</p>
+                <p>Echte Musik, echte Typen. Der Sound von morgen.</p>
             </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Über uns</h2>
+            <p>NFFM befindet sich aktuell im Aufbau. Wir arbeiten unter Hochdruck daran, euch bald das volle Programm mit Live-Moderation und den „Nachrichten für fast morgen“ zu präsentieren.</p>
+            <p>Aktuell hört ihr unseren Non-Stop Musik-Stream – handverlesener Sound mit Charakter, direkt aus dem Saarland. Sobald unsere Redaktion den Betrieb aufnimmt, erfahrt ihr es hier zuerst.</p>
+            <p><strong>Kontakt & Feedback:</strong> <a href="mailto:ecostudiobroadcasting.contact@gmail.com" style="color: var(--nffm-red);">ecostudiobroadcasting.contact@gmail.com</a></p>
         </div>
     </div>
 
@@ -81,18 +98,23 @@
 
     <div id="verkehr" class="tab-content">
         <h2 style="color: var(--nffm-red);">NFFM Verkehrszentrum</h2>
-        <p>Live-Daten direkt von verkehrsinformation.de:</p>
+        <p>Live-Daten aus dem Saarland (via verkehrsinformation.de):</p>
         <div id="traffic-list"><p>Daten werden geladen...</p></div>
-        <button onclick="loadTraffic()" style="margin-top:10px; padding:8px 15px; cursor:pointer;">Aktualisieren</button>
+        <button onclick="loadTraffic()" style="margin-top:15px; padding:10px 20px; cursor:pointer; background:var(--nffm-blue); color:white; border:none; border-radius:4px;">Jetzt aktualisieren</button>
     </div>
 
     <div id="team" class="tab-content">
         <h2>Kontakt</h2>
-        <p>E-Mail: <a href="mailto:ecostudiobroadcasting.contact@gmail.com">ecostudiobroadcasting.contact@gmail.com</a></p>
+        <div class="hero-box" style="padding: 20px;">
+            <p>Du hast Blitzer gesehen oder willst Teil des Teams werden?</p>
+            <strong>E-Mail:</strong> <a href="mailto:ecostudiobroadcasting.contact@gmail.com" style="color: var(--nffm-red);">ecostudiobroadcasting.contact@gmail.com</a>
+        </div>
     </div>
 </div>
 
-<footer>&copy; 2026 NFFM Media</footer>
+<footer>
+    &copy; 2026 NFFM Media | Kontakt: ecostudiobroadcasting.contact@gmail.com
+</footer>
 
 <script>
     function showTab(tabId) {
@@ -111,15 +133,12 @@
         const list = document.getElementById('traffic-list');
         list.innerHTML = "<p>System scannt das Saarland...</p>";
         
-        // Wir nutzen den RSS-Pfad, da dieser für Skripte lesbar ist
         const targetUrl = 'https://www.verkehrsinformation.de/rss/saarland.xml';
-        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
+        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl) + '&t=' + new Date().getTime();
 
         try {
             const response = await fetch(proxyUrl);
             const data = await response.json();
-            
-            // XML parsen
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(data.contents, "text/xml");
             const items = xmlDoc.querySelectorAll("item");
@@ -127,7 +146,7 @@
             list.innerHTML = "";
             
             if (items.length === 0) {
-                list.innerHTML = "<div class='traffic-entry' style='border-left-color: #28a745;'><strong>Alles frei!</strong> Aktuell keine Meldungen für das Saarland vorhanden.</div>";
+                list.innerHTML = "<div class='traffic-entry' style='border-left-color: #28a745;'><strong>Freie Fahrt!</strong> Aktuell keine Meldungen für das Saarland vorhanden.</div>";
                 return;
             }
 
@@ -140,7 +159,7 @@
 
                 if (text.includes("blitzer") || text.includes("radar") || text.includes("kontrolle")) {
                     typeClass = "type-blitzer"; badge = "<span class='badge bg-orange'>Blitzer</span>";
-                } else if (text.includes("unfall") || text.includes("gefahr") || text.includes("gegenstand")) {
+                } else if (text.includes("unfall") || text.includes("gefahr")) {
                     typeClass = "type-gefahr"; badge = "<span class='badge bg-black'>Gefahr</span>";
                 } else {
                     typeClass = "type-stau"; badge = "<span class='badge bg-red'>Stau</span>";
@@ -152,8 +171,7 @@
                 list.appendChild(entry);
             });
         } catch (e) {
-            console.error(e);
-            list.innerHTML = "<p>Fehler beim Abruf der Daten von verkehrsinformation.de. Bitte versuche es in ein paar Minuten erneut.</p>";
+            list.innerHTML = "<p>Fehler beim Abruf der Daten. Bitte Seite neu laden oder später versuchen.</p>";
         }
     }
 </script>
